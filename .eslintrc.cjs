@@ -2,7 +2,7 @@
  * @Author: mainkeys dymainkeys@gmail.com
  * @Date: 2024-01-20 15:23:19
  * @LastEditors: mainkeys dymainkeys@gmail.com
- * @LastEditTime: 2024-01-20 23:36:43
+ * @LastEditTime: 2024-01-20 23:47:25
  * @FilePath: \mks_admin\.eslintrc.cjs
  * @Description: ESLint配置
  */
@@ -793,7 +793,7 @@ module.exports = {
     'require-jsdoc': 'off',
     // @fixable 结尾必须有分号
     'semi': [
-      'error',
+      'off',
       'always',
       {
         omitLastInOneLineBlock: true
