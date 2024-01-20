@@ -1,0 +1,8 @@
+.vscode/
+dist/
+node_modules/
+static/
+
+**/*-min.js
+**/*/min.js
+.*
