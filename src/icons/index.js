@@ -2,7 +2,7 @@
  * @Author: mainkeys
  * @Date: 2024-03-02 13:54:09
  * @LastEditors: mainkeys dymainkeys@gmail.com
- * @LastEditTime: 2024-03-02 22:30:34
+ * @LastEditTime: 2024-03-03 21:21:46
  * @FilePath: \mks_admin\src\icons\index.js
  * @Description: import SVG
  */
@@ -15,7 +15,6 @@ const svgRequire = require.context('./svg', false, /\.svg$/)
 // 该函数提供了三个属性，可以通过 require.keys() 获取到所有的 svg 图标
 // 遍历图标，把图标作为 request 传入到 require 导入函数中，完成本地 svg 图标的导入
 svgRequire.keys().forEach(svgIcon => svgRequire(svgIcon))
-console.log(SvgIcon)
 
 export default app => {
   app.component('svg-icon', SvgIcon)

@@ -2,7 +2,7 @@
  * @Author: mainkeys
  * @Date: 2024-02-01 12:34:19
  * @LastEditors: mainkeys dymainkeys@gmail.com
- * @LastEditTime: 2024-03-03 17:03:16
+ * @LastEditTime: 2024-03-03 21:29:42
  * @FilePath: \mks_admin\src\views\login\index.vue
  * @Description: login page
 -->
@@ -48,7 +48,11 @@
         </span>
       </el-form-item>
 
-      <el-button type="primary" style="width: 100%; margin-bottom: 30px"
+      <el-button
+        type="primary"
+        style="width: 100%; margin-bottom: 30px"
+        :loading="loading"
+        @click="handleLogin"
         >登录</el-button
       >
     </el-form>
@@ -58,6 +62,8 @@
 <script setup>
 import { computed, ref } from 'vue'
 import { validatePassword } from './rules'
+import { useStore } from 'vuex'
+import { useRouter } from 'vue-router'
 // 数据源
 const loginForm = ref({
   username: 'super-admin',
@@ -91,6 +97,30 @@ const onChangePwdType = () => {
   } else {
     passwordType.value = 'password'
   }
+}
+
+// 登录动作处理
+const loading = ref(false)
+const loginFromRef = ref(null)
+const store = useStore()
+const router = useRouter()
+const handleLogin = () => {
+  loginFromRef.value.validate((valid) => {
+    if (!valid) return
+
+    loading.value = true
+    store
+      .dispatch('user/login', loginForm.value)
+      .then(() => {
+        loading.value = false
+        // 登录后操作
+        router.push('/')
+      })
+      .catch((err) => {
+        console.log(err)
+        loading.value = false
+      })
+  })
 }
 </script>
 

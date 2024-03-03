@@ -9,7 +9,9 @@
   },
   "dependencies": {
     "@element-plus/icons": "^0.0.11",
+    "axios": "^1.6.7",
     "core-js": "^3.8.3",
+    "md5": "^2.3.0",
     "or": "^0.2.0",
     "vue": "^3.2.8",
     "vue-router": "^4.0.11",
