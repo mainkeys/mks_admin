@@ -2,37 +2,49 @@
  * @Author: mainkeys
  * @Date: 2024-02-01 12:34:19
  * @LastEditors: mainkeys dymainkeys@gmail.com
- * @LastEditTime: 2024-03-02 13:44:50
+ * @LastEditTime: 2024-03-03 17:03:16
  * @FilePath: \mks_admin\src\views\login\index.vue
  * @Description: login page
 -->
 <template>
   <div class="login-container">
-    <el-form class="login-form" ref="loginFromRef">
+    <el-form
+      class="login-form"
+      ref="loginFromRef"
+      :model="loginForm"
+      :rules="loginRules"
+    >
       <div class="title-container">
         <h3 class="title">用户登录</h3>
       </div>
 
       <el-form-item prop="username">
         <span class="svg-container">
-          <el-icon>
-            <avatar />
-          </el-icon>
+          <svg-icon icon="user" />
         </span>
-        <el-input placeholder="username" name="username" type="text" />
+        <el-input
+          placeholder="username"
+          name="username"
+          type="text"
+          v-model="loginForm.username"
+        />
       </el-form-item>
 
       <el-form-item prop="password">
         <span class="svg-container">
-          <el-icon>
-            <avatar />
-          </el-icon>
+          <svg-icon icon="password" />
         </span>
-        <el-input placeholder="password" name="password" />
+        <el-input
+          placeholder="password"
+          name="password"
+          :type="passwordType"
+          v-model="loginForm.password"
+        />
         <span class="show-pwd">
-          <el-icon>
-            <avatar />
-          </el-icon>
+          <svg-icon
+            :icon="passwordType === 'password' ? 'eye' : 'eye-open'"
+            @click="onChangePwdType"
+          />
         </span>
       </el-form-item>
 
@@ -44,9 +56,42 @@
 </template>
 
 <script setup>
-// 导入组件之后无需注册可直接使用
-import { Avatar } from '@element-plus/icons'
-import {} from 'vue'
+import { computed, ref } from 'vue'
+import { validatePassword } from './rules'
+// 数据源
+const loginForm = ref({
+  username: 'super-admin',
+  password: '123456'
+})
+// 验证规则
+const loginRules = ref({
+  username: [
+    {
+      required: true,
+      trigger: 'blur',
+      message: computed(() => {
+        return '用户名为必填项'
+      })
+    }
+  ],
+  password: [
+    {
+      required: true,
+      trigger: 'blur',
+      validator: validatePassword()
+    }
+  ]
+})
+
+// 处理密码框文本显示状态
+const passwordType = ref('password')
+const onChangePwdType = () => {
+  if (passwordType.value === 'password') {
+    passwordType.value = 'text'
+  } else {
+    passwordType.value = 'password'
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -69,14 +114,14 @@ $cursor: #fff;
     margin: 0 auto;
     overflow: hidden;
 
-    :deep(.el-form-item){
+    :deep(.el-form-item) {
       border: 1px solid rgba(255, 255, 255, 0.1);
       background: rgba(0, 0, 0, 0.1);
       border-radius: 5px;
       color: #454545;
     }
 
-    :deep(.el-input){
+    :deep(.el-input) {
       display: inline-block;
       height: 47px;
       width: 85%;

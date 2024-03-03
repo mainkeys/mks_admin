@@ -1,3 +1,11 @@
+<!--
+ * @Author: mainkeys
+ * @Date: 2024-03-01 12:42:09
+ * @LastEditors: mainkeys dymainkeys@gmail.com
+ * @LastEditTime: 2024-03-03 15:30:49
+ * @FilePath: \mks_admin\src\components\SvgIcon\index.vue
+ * @Description: svgIconcomponent
+-->
 <template>
   <div
     v-if="isExternal"
@@ -11,10 +19,10 @@
 </template>
 
 <script setup>
-import { isExternal as external } from '@/utils/validate'
+import { isExternal as external } from '@/utils/cheackIsExternal'
 import { defineProps, computed } from 'vue'
 const props = defineProps({
-  // icon 图标
+  // icon 图标路径
   icon: {
     type: String,
     required: true
