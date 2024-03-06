@@ -2,11 +2,11 @@
  * @Author: mainkeys
  * @Date: 2024-03-03 19:18:20
  * @LastEditors: mainkeys dymainkeys@gmail.com
- * @LastEditTime: 2024-03-03 22:35:19
+ * @LastEditTime: 2024-03-06 21:42:41
  * @FilePath: \mks_admin\src\store\modules\user.js
  * @Description: vuex-user
  */
-import { login } from '@/api/sys'
+import { login, getUserInfo } from '@/api/sys'
 import md5 from 'md5'
 import { TOKEN } from '@/constant'
 import { setItem, getItem } from '@/utils/storage'
@@ -14,12 +14,16 @@ import { setItem, getItem } from '@/utils/storage'
 export default {
   namespaced: true,
   state: () => ({
-    token: getItem(TOKEN) || ''
+    token: getItem(TOKEN) || '',
+    userInfo: {}
   }),
   mutations: {
     setToken (state, token) {
       state.token = token
       setItem(TOKEN, token)
+    },
+    setUserInfo (state, userInfo) {
+      state.userInfo = userInfo
     }
   },
   actions: {
@@ -39,6 +43,11 @@ export default {
             reject(err)
           })
       })
+    },
+    async getUserInfo (context) {
+      const res = await getUserInfo()
+      this.commit('user/setUserInfo', res)
+      return res
     }
   }
 }
