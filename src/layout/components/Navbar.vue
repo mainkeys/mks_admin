@@ -2,7 +2,7 @@
  * @Author: mainkeys
  * @Date: 2024-03-08 22:47:23
  * @LastEditors: mainkeys dymainkeys@gmail.com
- * @LastEditTime: 2024-03-09 13:04:46
+ * @LastEditTime: 2024-03-09 13:29:54
  * @FilePath: \mks_admin\src\layout\components\Navbar.vue
  * @Description: 导航栏
 -->
@@ -35,7 +35,7 @@
             <a target="_blank" href="#">
               <el-dropdown-item>课程主页</el-dropdown-item>
             </a>
-            <el-dropdown-item divided> 登出 </el-dropdown-item>
+            <el-dropdown-item divided @click="logout"> 登出 </el-dropdown-item>
           </el-dropdown-menu>
         </template>
       </el-dropdown>
@@ -45,6 +45,12 @@
 
 <script setup>
 import {} from 'vue'
+import { useStore } from 'vuex'
+
+const store = useStore()
+const logout = () => {
+  store.dispatch('user/logout')
+}
 </script>
 
 <style lang="scss" scoped>
