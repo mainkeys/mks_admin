@@ -2,17 +2,19 @@
  * @Author: mainkeys
  * @Date: 2024-03-04 03:13:32
  * @LastEditors: mainkeys dymainkeys@gmail.com
- * @LastEditTime: 2024-03-06 20:49:08
+ * @LastEditTime: 2024-03-11 22:47:13
  * @FilePath: \mks_admin\src\layout\index.vue
  * @Description: 布局
 -->
 <template>
-  <div
-    class="app-wrapper"
-    :class="[$store.getters.sidebarOpened ? 'openSidebar' : 'hideSidebar']"
-  >
+  <div :class="['app-wrapper', 'openSidebar']">
+    <!-- :class="[$store.getters.sidebarOpened ? 'openSidebar' : 'hideSidebar']" -->
     <!-- 左侧 menu -->
-    <sidebar id="guide-sidebar" class="sidebar-container" />
+    <sidebar
+      id="guide-sidebar"
+      class="sidebar-container"
+      style="background-color: skyblue"
+    />
     <!-- :style="{ backgroundColor: $store.getters.cssVar.menuBg }" -->
     <div class="main-container">
       <div class="fixed-header">
@@ -50,5 +52,10 @@ import AppMain from './components/AppMain'
   right: 0;
   z-index: 9;
   width: calc(100% - #{$sideBarWidth});
+  transition: width #{$sideBarDuration};
+}
+
+.hideSidebar .fixed-header {
+  width: calc(100% - #{$hideSideBarWidth});
 }
 </style>

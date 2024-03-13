@@ -2,13 +2,13 @@
  * @Author: mainkeys
  * @Date: 2024-03-03 23:35:21
  * @LastEditors: mainkeys dymainkeys@gmail.com
- * @LastEditTime: 2024-03-06 21:46:37
+ * @LastEditTime: 2024-03-11 22:29:57
  * @FilePath: \mks_admin\src\layout\components\Sidebar\index.vue
  * @Description: 侧边栏
 -->
 <template>
   <div class="">
-    <div class="logo-container">
+    <!-- <div class="logo-container">
       <el-avatar
         :size="logoHeight"
         shape="square"
@@ -17,34 +17,35 @@
       <h1 class="logo-title" v-if="$store.getters.sidebarOpened">
         imooc-admin
       </h1>
-    </div>
-    <!-- <el-scrollbar>
+    </div> -->
+    <h1>占位</h1>
+    <el-scrollbar>
       <sidebar-menu></sidebar-menu>
-    </el-scrollbar> -->
+    </el-scrollbar>
   </div>
 </template>
 
 <script setup>
-// import SidebarMenu from './SidebarMenu'
+import SidebarMenu from './SidebarMenu'
 import {} from 'vue'
 
-const logoHeight = 44
+// const logoHeight = 44
 </script>
 
 <style lang="scss" scoped>
-.logo-container {
-  height: v-bind(logoHeight) + 'px';
-  padding: 10px 0 22px 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  .logo-title {
-    margin-left: 10px;
-    color: #fff;
-    font-weight: 600;
-    line-height: 50px;
-    font-size: 16px;
-    white-space: nowrap;
-  }
-}
+// .logo-container {
+//   height: v-bind(logoHeight) + 'px';
+//   padding: 10px 0 22px 0;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   .logo-title {
+//     margin-left: 10px;
+//     color: #fff;
+//     font-weight: 600;
+//     line-height: 50px;
+//     font-size: 16px;
+//     white-space: nowrap;
+//   }
+// }
 </style>
