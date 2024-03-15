@@ -1,11 +1,3 @@
-/*
- * @Author: mainkeys
- * @Date: 2024-03-03 22:41:51
- * @LastEditors: mainkeys dymainkeys@gmail.com
- * @LastEditTime: 2024-03-06 21:43:51
- * @FilePath: \mks_admin\src\permission.js
- * @Description: 路由守卫
- */
 import router from './router'
 import store from './store'
 
@@ -25,20 +17,19 @@ router.beforeEach(async (to, from, next) => {
       // 判断用户资料是否获取
       // 若不存在用户信息，则需要获取用户信息
       if (!store.getters.hasUserInfo) {
-        await store.dispatch('user/getUserInfo')
-        // // 触发获取用户信息的 action，并获取用户当前权限
-        // const { permission } = await store.dispatch('user/getUserInfo')
-        // // 处理用户权限，筛选出需要添加的权限
-        // const filterRoutes = await store.dispatch(
-        //   'permission/filterRoutes',
-        //   permission.menus
-        // )
-        // // 利用 addRoute 循环添加
-        // filterRoutes.forEach((item) => {
-        //   router.addRoute(item)
-        // })
-        // // 添加完动态路由之后，需要在进行一次主动跳转
-        // return next(to.path)
+        // 触发获取用户信息的 action，并获取用户当前权限
+        const { permission } = await store.dispatch('user/getUserInfo')
+        // 处理用户权限，筛选出需要添加的权限
+        const filterRoutes = await store.dispatch(
+          'permission/filterRoutes',
+          permission.menus
+        )
+        // 利用 addRoute 循环添加
+        filterRoutes.forEach((item) => {
+          router.addRoute(item)
+        })
+        // 添加完动态路由之后，需要在进行一次主动跳转
+        return next(to.path)
       }
       next()
     }

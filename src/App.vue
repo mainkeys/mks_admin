@@ -1,25 +1,39 @@
+<!--
+ * @Author: mainkeys
+ * @Date: 2024-03-13 22:35:01
+ * @LastEditors: mainkeys dymainkeys@gmail.com
+ * @LastEditTime: 2024-03-13 22:40:02
+ * @FilePath: \mks_admin\src\App.vue
+ * @Description: App
+-->
 <template>
-  <router-view />
+  <el-config-provider :locale="store.getters.language === 'en' ? en : zhCn">
+    <router-view />
+  </el-config-provider>
 </template>
 
-<script>
-// import HelloWorld from './components/HelloWorld.vue'
+<script setup>
+import { useStore } from 'vuex'
+import { generateNewStyle, writeNewStyle } from '@/utils/theme'
+import { watchSwitchLang } from '@/utils/i18n'
+import zhCn from 'element-plus/lib/locale/lang/zh-cn'
+import en from 'element-plus/lib/locale/lang/en'
 
-// export default {
-//   name: 'App',
-//   components: {
-//     HelloWorld
-//   }
-// }
+const store = useStore()
+generateNewStyle(store.getters.mainColor).then((newStyleText) => {
+  writeNewStyle(newStyleText)
+})
+
+/**
+ * 监听 语言变化，重新获取个人信息
+ */
+watchSwitchLang(() => {
+  if (store.getters.token) {
+    store.dispatch('user/getUserInfo')
+  }
+})
+
+// document.body.removeChild(document.getElementById('m-toast'))
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+<style lang="scss"></style>

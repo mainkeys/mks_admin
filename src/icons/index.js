@@ -1,11 +1,3 @@
-/*
- * @Author: mainkeys
- * @Date: 2024-03-02 13:54:09
- * @LastEditors: mainkeys dymainkeys@gmail.com
- * @LastEditTime: 2024-03-03 21:21:46
- * @FilePath: \mks_admin\src\icons\index.js
- * @Description: import SVG
- */
 import SvgIcon from '@/components/SvgIcon'
 
 // https://webpack.docschina.org/guides/dependency-management/#requirecontext

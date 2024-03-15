@@ -1,27 +1,20 @@
-<!--
- * @Author: mainkeys
- * @Date: 2024-03-04 03:13:32
- * @LastEditors: mainkeys dymainkeys@gmail.com
- * @LastEditTime: 2024-03-11 22:47:13
- * @FilePath: \mks_admin\src\layout\index.vue
- * @Description: 布局
--->
 <template>
-  <div :class="['app-wrapper', 'openSidebar']">
-    <!-- :class="[$store.getters.sidebarOpened ? 'openSidebar' : 'hideSidebar']" -->
+  <div
+    class="app-wrapper"
+    :class="[$store.getters.sidebarOpened ? 'openSidebar' : 'hideSidebar']"
+  >
     <!-- 左侧 menu -->
     <sidebar
       id="guide-sidebar"
       class="sidebar-container"
-      style="background-color: skyblue"
+      :style="{ backgroundColor: $store.getters.cssVar.menuBg }"
     />
-    <!-- :style="{ backgroundColor: $store.getters.cssVar.menuBg }" -->
     <div class="main-container">
       <div class="fixed-header">
         <!-- 顶部的 navbar -->
         <navbar />
         <!-- tags -->
-        <!-- <tags-view id="guide-tags"></tags-view> -->
+        <tags-view id="guide-tags"></tags-view>
       </div>
       <!-- 内容区 -->
       <app-main />
@@ -33,6 +26,7 @@
 import Navbar from './components/Navbar'
 import Sidebar from './components/Sidebar'
 import AppMain from './components/AppMain'
+import TagsView from '@/components/TagsView'
 </script>
 
 <style lang="scss" scoped>

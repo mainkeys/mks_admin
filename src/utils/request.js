@@ -1,23 +1,13 @@
-/*
- * @Author: mainkeys
- * @Date: 2024-03-03 19:11:58
- * @LastEditors: mainkeys dymainkeys@gmail.com
- * @LastEditTime: 2024-03-09 17:24:29
- * @FilePath: \mks_admin\src\utils\request.js
- * @Description: axios封装
- */
 import axios from 'axios'
 import store from '@/store'
-import { ElMessage as message } from 'element-plus'
-import { isCheckTimeout } from '@/utils/timeout'
+import { ElMessage } from 'element-plus'
+import { isCheckTimeout } from '@/utils/auth'
 // import md5 from 'md5'
 
 const service = axios.create({
   baseURL: process.env.VUE_APP_BASE_API,
-  timeout: 5000
+  timeout: 50000
 })
-
-// export default service
 
 // 请求拦截器
 service.interceptors.request.use(
@@ -34,14 +24,13 @@ service.interceptors.request.use(
       config.headers.Authorization = `Bearer ${store.getters.token}`
     }
     // 配置接口国际化
-    // config.headers['Accept-Language'] = store.getters.language
+    config.headers['Accept-Language'] = store.getters.language
     return config // 必须返回配置
   },
   (error) => {
     return Promise.reject(error)
   }
 )
-export default service
 
 // 响应拦截器
 service.interceptors.response.use(
@@ -52,7 +41,7 @@ service.interceptors.response.use(
       return data
     } else {
       // 业务错误
-      message.error(message) // 提示错误消息
+      ElMessage.error(message) // 提示错误消息
       return Promise.reject(new Error(message))
     }
   },
@@ -66,7 +55,9 @@ service.interceptors.response.use(
       // token超时
       store.dispatch('user/logout')
     }
-    message.error(error.message) // 提示错误信息
+    ElMessage.error(error.message) // 提示错误信息
     return Promise.reject(error)
   }
 )
+
+export default service

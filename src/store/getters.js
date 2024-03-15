@@ -1,11 +1,6 @@
-/*
- * @Author: mainkeys
- * @Date: 2024-03-08 22:47:23
- * @LastEditors: mainkeys dymainkeys@gmail.com
- * @LastEditTime: 2024-03-08 23:11:14
- * @FilePath: \mks_admin\src\store\getters.js
- * @Description: getters
- */
+import { MAIN_COLOR } from '@/constant'
+import { getItem } from '@/utils/storage'
+import { generateColors } from '@/utils/theme'
 
 const getters = {
   token: state => state.user.token,
@@ -15,7 +10,16 @@ const getters = {
    */
   hasUserInfo: state => {
     return JSON.stringify(state.user.userInfo) !== '{}'
-  }
+  },
+  cssVar: state => {
+    return {
+      ...state.theme.variables,
+      ...generateColors(getItem(MAIN_COLOR))
+    }
+  },
+  sidebarOpened: state => state.app.sidebarOpened,
+  language: state => state.app.language,
+  mainColor: state => state.theme.mainColor,
+  tagsViewList: state => state.app.tagsViewList
 }
-
 export default getters

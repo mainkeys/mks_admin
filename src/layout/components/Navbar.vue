@@ -1,22 +1,14 @@
-<!--
- * @Author: mainkeys
- * @Date: 2024-03-08 22:47:23
- * @LastEditors: mainkeys dymainkeys@gmail.com
- * @LastEditTime: 2024-03-09 13:29:54
- * @FilePath: \mks_admin\src\layout\components\Navbar.vue
- * @Description: 导航栏
--->
 <template>
   <div class="navbar">
-    <!-- <hamburger class="hamburger-container" /> -->
-    <!-- <breadcrumb id="guide-breadcrumb" class="breadcrumb-container" /> -->
+    <hamburger class="hamburger-container" />
+    <breadcrumb id="guide-breadcrumb" class="breadcrumb-container" />
 
     <div class="right-menu">
-      <!-- <guide class="right-menu-item hover-effect" /> -->
-      <!-- <header-search class="right-menu-item hover-effect"></header-search> -->
-      <!-- <screenfull class="right-menu-item hover-effect" /> -->
-      <!-- <theme-picker class="right-menu-item hover-effect"></theme-picker> -->
-      <!-- <lang-select class="right-menu-item hover-effect" /> -->
+      <guide class="right-menu-item hover-effect" />
+      <header-search class="right-menu-item hover-effect"></header-search>
+      <screenfull class="right-menu-item hover-effect" />
+      <theme-picker class="right-menu-item hover-effect"></theme-picker>
+      <lang-select class="right-menu-item hover-effect" />
       <!-- 头像 -->
       <el-dropdown class="avatar-container" trigger="click">
         <div class="avatar-wrapper">
@@ -30,12 +22,14 @@
         <template #dropdown>
           <el-dropdown-menu class="user-dropdown">
             <router-link to="/">
-              <el-dropdown-item> 主页 </el-dropdown-item>
+              <el-dropdown-item> {{ $t('msg.navBar.home') }} </el-dropdown-item>
             </router-link>
-            <a target="_blank" href="#">
-              <el-dropdown-item>课程主页</el-dropdown-item>
+            <a target="_blank" href="https://coding.imooc.com/class/542.html">
+              <el-dropdown-item>{{ $t('msg.navBar.course') }}</el-dropdown-item>
             </a>
-            <el-dropdown-item divided @click="logout"> 登出 </el-dropdown-item>
+            <el-dropdown-item divided @click="logout">
+              {{ $t('msg.navBar.logout') }}
+            </el-dropdown-item>
           </el-dropdown-menu>
         </template>
       </el-dropdown>
@@ -44,6 +38,13 @@
 </template>
 
 <script setup>
+import Hamburger from '@/components/Hamburger'
+import Breadcrumb from '@/components/Breadcrumb'
+import LangSelect from '@/components/LangSelect'
+import ThemePicker from '@/components/ThemePicker'
+import Screenfull from '@/components/Screenfull'
+import HeaderSearch from '@/components/HeaderSearch'
+import Guide from '@/components/Guide'
 import {} from 'vue'
 import { useStore } from 'vuex'
 
@@ -84,7 +85,7 @@ const logout = () => {
     float: right;
     padding-right: 16px;
 
-    :deep(.right-menu-item) {
+    :deep(.right-menu-item){
       display: inline-block;
       padding: 0 18px 0 0;
       font-size: 24px;
@@ -101,7 +102,7 @@ const logout = () => {
       }
     }
 
-    :deep(.avatar-container) {
+    :deep(.avatar-container){
       cursor: pointer;
       .avatar-wrapper {
         margin-top: 5px;
